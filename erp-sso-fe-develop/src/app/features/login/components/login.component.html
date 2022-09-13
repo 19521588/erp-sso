@@ -1,0 +1,101 @@
+<div
+  class="    
+lg:w-auto lg:px-[24px] lg:pb-[42px]
+md:w-full md:px-[48px]  pb-[74px]
+w-full h-full py-[50px] px-[1.7rem] m-auto lg:bg-blue"
+  [formGroup]="form"
+>
+  <div class="
+lg:pb-[40px] lg:flex  lg:w-full lg:justify-between lg:pt-[28px]
+md:px-[35px] md:text-[20px] md:py-[70px] max-w-[1400px] m-auto
+bg-white px-[16px] pt-[57px] pb-[60px] rounded-lg w-auto">
+    <div class=" hidden  justify-center w-full items-center content-center lg:flex ">
+      <div class="max-w-[500px] ">
+        <img
+          src="/assets/img/image_2022_08_08T04_48_42_216Z.png"
+          class=" aspect-[4/3]   "
+        >
+      </div>
+    </div>
+    <div>
+      <div class="lg:flex hidden text-[48px] mb-[17px] font-semibold text-blue items-end">
+        <p class="m-auto">Sign In</p>
+      </div>
+      <div class="
+        lg:border-[3px] lg:border-blue lg:min-w-[400px] lg:h-auto lg:shadow-blue
+        lg:px-[44px] lg:pb-[37px]  lg:pt-[60px] lg:right-4 lg:rounded-lg">
+        <div>
+          <app-text-input
+            title="{{'input-username' |translate }}"
+            formControlName="username"
+            [formFieldControl]="fields.username"
+            [errrorMessages]="usernameFieldErrors"
+            [(ngModel)]="txtusername"
+          >
+          </app-text-input>
+        </div>
+        <div class="
+        md:pt-[90px]
+        pt-[57px]">
+          <app-text-input
+            [isPassword]="true"
+            title="{{'input-password'|translate}}"
+            formControlName="password"
+            [formFieldControl]="fields.password"
+            [errrorMessages]="passwordFieldErrors"
+            [(ngModel)]="txtpassword"
+          >
+          </app-text-input>
+        </div>
+        <div class="
+        lg:pb-[47px]
+        md:text-[14px] md:pt-[55px]
+        pt-[40px] text-[10px] flex justify-between  text-blue">
+          <div
+            class="
+        flex cursor-pointer items-center"
+            (click)="clickcheck()"
+          >
+            <img
+              [src]="imgcheck"
+              class="
+        md:w-[14px] md:h-[14px]    
+        select-none "
+            >
+            <label
+              for="checked-checkbox select-none cursor-pointer"
+              class="ml-2"
+            >
+              Remember me
+            </label>
+          </div>
+          <a
+            class=" cursor-pointer "
+            (click)="forgot()"
+          >
+            Forgot password?
+          </a>
+        </div>
+        <input
+          type="button"
+          value="SIGN IN"
+          (click)="login()"
+          class="lg:block hidden button-long w-full"
+          [disabled]="iserr()"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="
+lg:hidden
+md:pt-[50px]
+pt-[35px]">
+    <input
+      type="button"
+      class="button-long w-full"
+      value="SIGN IN"
+      [disabled]="iserr()"
+      (click)="login()"
+    >
+  </div>
+</div>

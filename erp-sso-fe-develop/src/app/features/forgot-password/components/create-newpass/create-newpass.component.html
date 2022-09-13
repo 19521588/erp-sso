@@ -1,0 +1,89 @@
+<div
+  class="
+lg:px-[40px] lg:bg-blue xl:max-w-full lg:mt-[50px]
+px-[16%]   bg-white h-full"
+  [formGroup]="createNewPassword"
+>
+  <div class="lg:hidden w-full">
+    <div class>
+      <img
+        src="/assets/icons/Back Arrow.svg"
+        class="w-[30px] h-[30px] "
+        routerLink="/forgot-password"
+      >
+    </div>
+
+  </div>
+  <div class=" 
+    w-full lg:flex lg:py-[30px] justify-around xl:max-w-[1363px] xl:px-[30px] lg:bg-white rounded-xl m-auto">
+
+    <div class=" lg:flex justify-center w-[50%] hidden ">
+      <img
+        src="/assets/img/edit_21.png"
+        class="aspect-[5/4]"
+      >
+    </div>
+
+    <div class="pl-5">
+      <p class=" xl:text-[28px] lg:text-[26px] lg:font-semibold lg:leading-10 text-[20px]  font-medium text-blue leading-6 text-center">CREATE NEW PASSWORD</p>
+      <img
+        src="/assets/img/image 9.png"
+        class="lg:hidden m-auto pt-[4%]"
+      >
+
+      <div class>
+        <div class="text-center">
+          <div class="pt-[35px]">
+            <p class="xl:text-[20px] lg:text-[18px] text-[16px] font-normal leading-5 text-blue">Please enter the new password</p>
+
+          </div>
+        </div>
+        <div class="mt-[80px] xl:ml-[30px] px-[20px] text-blue">
+          <div>
+            <p>New password</p>
+            <app-text-input
+              [isPassword]="false"
+              [formFieldControl]="fields.password"
+              formControlName="password"
+              [errrorMessages]="passwordFieldErrors"
+              [(ngModel)]="password"
+            ></app-text-input>
+          </div>
+          <div class="mt-10">
+            <p>Confirm new password</p>
+            <app-text-input
+              [formFieldControl]="fields.repeatPassword"
+              [isPassword]="true"
+              formControlName="repeatPassword"
+              [errrorMessages]="passwordFieldErrors"
+              [(ngModel)]="repeatpassword"
+            >
+            </app-text-input>
+          </div>
+          <div class="
+            xl:mt-3
+            ">
+            <div class="flex justify-center">
+              <input
+                type="button"
+                class=" bg-buttonYellow py-1  disabled:bg-buttonYellowDisabled  rounded-lg text-[24px] text-white font-medium leading-7 lg:px-[100px] m-auto  mt-[70px] cursor-pointer
+                        px-[50px]"
+                value="CONFIRM"
+                (click)="createnewpass()"
+                [disabled]="createNewPassword.valid? false:true"
+              >
+            </div>
+            <div class=" lg:hidden mt-[35px] text-center ">
+              <a
+                routerLink="/login"
+                class=" lg:text-[16px] text-[18px] text-blue font-medium cursor-pointer leading-5"
+              >
+                Back to SIGN IN
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

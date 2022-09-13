@@ -1,0 +1,23 @@
+<div class="py-[25px] px-[35px] w-auto mt-[20px]">
+  <div class="flex justify-center">
+    <div class="xl:grid-cols-3 lg:grid-cols-2 grid gap-x-[78px] gap-y-[22px]">
+      <div *ngFor="let component of data">
+        <div
+          class="w-[275px] h-[110px] bg-white hover:bg-blueBADCEE shadow-lg rounded-lg flex pl-[25px] py-[33px] relative cursor-pointer"
+          (click)="redi(component.id)"
+        >
+          <img
+            src="http://api-sso.swerp.com/images/icons/{{component.icon}}"
+            class="w-12 h-12 mr-[33px]"
+          >
+          <span
+            class="border-[4px] absolute left-[95px] top-0 h-[110px]"
+            [style]="'border-color: '+ component.color"
+          ></span>
+          <span class="ml-[30px] text-[18px] text-blue font-medium leading-[22px] mt-[15px] align-middle">{{component.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

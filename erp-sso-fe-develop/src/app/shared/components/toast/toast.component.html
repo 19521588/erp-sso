@@ -1,0 +1,25 @@
+<div
+  class="{{statusToast==='Succeed'? 'toastSucceed':'toastFail'}} "
+  *ngIf="IsOpen"
+>
+  <div class="flex justify-between">
+    <div class="flex">
+      <img
+        class="w-5 h-5 mr-3"
+        src="{{statusToast==='Succeed'? '/assets/icons/succ.svg':'/assets/icons/emoji-sad.svg'}}"
+      >
+      <p class="leading-6 text-[14px] font-semibold">{{statusToast}}</p>
+    </div>
+    <div>
+      <img
+        class="w-5 h-5  "
+        src="{{statusToast==='Succeed'? '/assets/icons/x.svg':'/assets/icons/x-red.svg'}}"
+        (click)="close()"
+      >
+    </div>
+  </div>
+  <div>
+    <p class=" ml-8 text-[14px]  leading-6">{{MessToast}}</p>
+  </div>
+  <ng-content></ng-content>
+</div>

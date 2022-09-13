@@ -1,0 +1,9 @@
+{
+    "hello": "Hi",
+    "input-password": "Password",
+    "input-username": "Username",
+    "password-is-required": "Password is required",
+    "username-is-required": "Username is required",
+    "error-password-min-length": "Password length should be {{requiredLength}} at least. But it is actual {{actualLength}}",
+    "error-username-with-space": "Username should not contain any space"
+}

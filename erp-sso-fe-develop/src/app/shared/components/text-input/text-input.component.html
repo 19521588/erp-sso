@@ -1,0 +1,34 @@
+<div>
+  <div class="flex">
+    <input
+      [placeholder]="title"
+      [type]="inputType"
+      [(ngModel)]="value"
+      class="md:text-[20px] text-[12px] w-full outline-none border-none bg-transparent"
+      (focus)="onTouched()"
+      on-focus="focusFunction()"
+      on-focusout="focusOutFunction()"
+    >
+    <div
+      class="sm:h-[26px] w-[28px] cursor-pointer flex border-none"
+      *ngIf="isPassword"
+      (click)="toggleEyeIcon()"
+    >
+      <img
+        [src]="checkicon"
+        class="border-none"
+      >
+    </div>
+  </div>
+  <div class="border-b border-gray-400"></div>
+  <span
+    class="text-invalid flex"
+    *ngIf="firstErrorMessage && touch"
+  >
+    <img
+      src="/assets/icons/invalid.svg"
+      class="w-4 h-4"
+    >
+    <span class="ml-1">{{firstErrorMessage}}</span>
+  </span>
+</div>

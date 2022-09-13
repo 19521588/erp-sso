@@ -1,0 +1,248 @@
+<div class="max-w-[1024px]">
+  <app-toast
+    id="notifi"
+    class=" "
+    statusToast="{{statusToast}}"
+    MessToast="{{MessToast}}"
+  ></app-toast>
+  <div>
+    <p>User List</p>
+  </div>
+  <div>
+    <div class="flex justify-between">
+      <div>
+        <button
+          class="primary-button"
+          (click)="openModalAdd('addUser')"
+        >
+          Add user
+        </button>
+      </div>
+      <div>
+        <div class="flex relative">
+          <input
+            [(ngModel)]="tem"
+            class="hover:border-none border hover:bg-primaryblue h-10 px-5 pr-16 rounded-lg text-sm w-[400px] focus:outline-none placeholder-textblue"
+            placeholder="Search "
+            (keyup)="search()"
+          >
+          <img
+            src="/assets/icons/search.svg"
+            class="absolute right-3 top-3"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="text-textblue w-full font-semibold leading-7 text-[18px]">
+      <div class="flex w-full">
+        <div class="w-[60%] gap-4 flex ">
+          <div class="w-[30%]">FirstName</div>
+          <div class="w-[30%]">LastName</div>
+          <div class="w-[40%] text-center">Email</div>
+        </div>
+        <div class=" w-[40%] flex ">
+          <div class="w-[40%]">Role</div>
+          <div class="w-[40%] text-center">Status</div>
+          <div class="w-[20%]">Action</div>
+        </div>
+      </div>
+      <p class="border mt-2 w-full border-linegray"></p>
+    </div>
+
+    <div *ngFor="let user of data">
+      <div class="flex w-full mt-2">
+        <div class="w-[60%] gap-4 flex ">
+          <div class="w-[30%]">{{user.lastName}}</div>
+          <div class="w-[30%]">{{user.firstName}}</div>
+          <div class="w-[40%]">{{user.email}}</div>
+        </div>
+        <div class=" w-[40%] flex ">
+          <div class="w-[50%]">{{user.role}}</div>
+          <div class="w-[50%] flex justify-around ml-[-30px] ">
+            <span class="{{user.enabled? 'active':'deactive'}}">{{user.enabled? 'Actived':'Deactive'}}</span>
+            <img
+              class="cursor-pointer"
+              src="/assets/icons/trash.svg"
+              (click)="openModal('delete',user.lastName,user.firstName,user.id)"
+            >
+          </div>
+        </div>
+      </div>
+      <p class="border mt-2 w-full border-linegray"></p>
+    </div>
+    <div class="relative mt-[45px] mb-[100px]">
+      <div class="flex gap-4 absolute right-0 bottom-0 mt-[30px] mr-1">
+        <div
+          class="flex gap-2 cursor-pointer"
+          (click)="Prev()"
+        >
+          <img
+            src="/assets/icons/arrow left.svg"
+            class="select-none"
+          >
+          <p class="select-none mt-1">Prev</p>
+        </div>
+        <div *ngFor="let page of totalPage">
+          <div
+            (click)="changePage(page)"
+            class="cursor-pointer text-center w-8 h-8 px-1 py-1 rounded {{page === ispage? 'bg-bluepage text-white':'bg-white'}}"
+          >
+            {{page +1}}
+          </div>
+        </div>
+        <div
+          class="flex gap-2 cursor-pointer"
+          (click)="next()"
+        >
+          <img
+            src="/assets/icons/arrow right.svg"
+            class="select-none"
+          >
+          <p class="select-none mt-1">Next</p>
+        </div>
+        <select
+          [(ngModel)]="pageSize"
+          class="ml-[30px] outline-none"
+          (change)="changesize($event)"
+        >
+          <option value="10">10 per page</option>
+          <option value="15">15 per page</option>
+          <option value="20">20 per page</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
+<app-modal id="delete">
+  <div class=" pt-[30px] w-[450px] pb-7 text-center m-auto">
+    <div class="flex justify-between px-7 mb-2">
+      <span>REMOVE USER</span>
+      <img
+        class="h-5 w-5 cursor-pointer"
+        src="/assets/icons/close.svg"
+        (click)="closeModal('delete')"
+      >
+    </div>
+    <p class="border border-linegray"></p>
+    <p class="mt-[20px]">Are you sure  you want remove</p>
+    <p>
+      {{lastname}} {{firstname}} from this component
+    </p>
+    <div class="pt-6 flex justify-around">
+      <input
+        class="bg-whitef text-buttongray py-[4px] px-[24px] rounded-lg border border-linegray"
+        type="button"
+        value="Cancel"
+        (click)="closeModal('delete')"
+      >
+      <div
+        (click)="deleteuser('delete')"
+        class="bg-reddeactive text-red py-[4px] px-[24px] rounded-lg"
+      >
+        <input
+          type="button"
+          value="Remove"
+          class="pr-1"
+        >
+      </div>
+    </div>
+  </div>
+</app-modal>
+<app-modal id="addUser">
+  <div class="w-[770px] h-[660px] py-[47px] px-[32px]">
+    <div class="text-textblue text-[24px] leading-6 font-medium  flex justify-between">
+      <p>Create new user</p>
+      <img
+        src="/assets/icons/close.svg"
+        class="w-4 h-4 cursor-pointer"
+        (click)="closeModal('addUser')"
+      >
+    </div>
+    <div class="mt-6 flex ">
+      <div class="mr-[40px]">
+        <div>
+          <app-primary-input title="First name"></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <app-primary-input title="Email"></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <app-input-date></app-input-date>
+        </div>
+        <div class="mt-6">
+          <app-primary-input
+            title="ID/Passport number"
+            placeholder="ID/Passport number"
+          ></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <app-primary-input
+            title="Phone number"
+            placeholder="Phone number"
+          ></app-primary-input>
+        </div>
+
+      </div>
+      <div>
+        <div>
+          <app-primary-input title="Last name"></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <app-primary-input title="User ID"></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <label>Gender</label>
+          <div class="flex justify-around mt-8">
+            <div>
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value
+                class="w-4 h-4 mr-2"
+              >
+              <label>Male</label>
+            </div>
+            <div>
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value
+                class="w-4 h-4 mr-2"
+              >
+              <label>Male</label>
+            </div>
+            <div>
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value
+                class="w-4 h-4 mr-2"
+              >
+              <label>Male</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="mt-6">
+          <app-primary-input
+            title="Country"
+            placeholder="Country"
+          ></app-primary-input>
+        </div>
+        <div class="mt-6">
+          <app-primary-input
+            title="Address"
+            placeholder="Address"
+          ></app-primary-input>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end mt-6">
+      <button class="primary-button">Create</button>
+    </div>
+
+  </div>
+</app-modal>

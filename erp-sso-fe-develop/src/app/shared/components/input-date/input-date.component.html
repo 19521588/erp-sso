@@ -1,0 +1,94 @@
+<label>Date of birth</label>
+<div class=" max-w-[320px] grid grid-cols-3 gap-1">
+  <div>
+    <div
+      id="day"
+      class="border-primarygray border rounded-lg w-[80px] p-[15px] {{!check?'border-primarygray':'border-textblue'}}"
+      (click)="click(1)"
+    >
+      <div class=" {{check?'text-black':'text-textblue'}}">{{day}}</div>
+    </div>
+    <div
+      *ngIf="check"
+      class=" fixed w-[80px] h-[300px] overflow-y-scroll"
+    >
+      <div
+        *ngFor="let d of days"
+        class="text-center"
+      >
+        <span
+          (click)="changeValue(d)"
+          class="cursor-pointer"
+        >
+          {{d}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      id="day"
+      class="border-primarygray border rounded-lg w-[80px] p-[15px] {{!checkMon?'border-primarygray':'border-textblue'}}"
+      (click)="click(2)"
+    >
+      <div class="w-20 {{checkMon?'text-black':'text-textblue'}}">{{mon}}</div>
+    </div>
+    <div
+      *ngIf="checkMon"
+      class=" fixed w-[80px] h-[300px] overflow-y-scroll"
+    >
+      <div
+        *ngFor="let m of mons"
+        class="text-center"
+      >
+        <span
+          (click)="changeValueMon(m)"
+          class="cursor-pointer"
+        >
+          {{m}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div>
+    <div
+      id="day"
+      class="border-primarygray border rounded-lg w-[80px] p-[15px] {{!checkYear?'border-primarygray':'border-textblue'}}"
+      (click)="click(3)"
+    >
+      <div class=" {{checkYear?'text-black':'text-textblue'}}">{{year}}</div>
+    </div>
+    <div
+      *ngIf="checkYear"
+      class=" fixed w-[80px] h-[300px] overflow-y-scroll"
+    >
+      <div
+        *ngFor="let y of years"
+        class="text-center"
+      >
+        <span
+          (click)="changeValueYear(y)"
+          class="cursor-pointer"
+        >
+          {{y}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<span
+  class="text-invalid flex"
+  *ngIf="!rex() &&checkDate()"
+>
+  <img
+    src="/assets/icons/invalid.svg"
+    class="w-4 h-4"
+  >
+  <span class="ml-1">Vui lòng nhập lại</span>
+</span>

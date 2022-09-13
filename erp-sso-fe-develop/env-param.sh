@@ -1,0 +1,13 @@
+#!/bin/bash
+export namespace="swwebdeverp"
+export service_domain="sso.swerp.com"
+export service_name="esso"
+export host_port="7512"
+export service_port="80"
+export min_pod="1"
+export max_pod="10"
+export cpu="1"
+export memory="1000"
+export storage="1"
+export mount_path="/home"
+export tag="latest"

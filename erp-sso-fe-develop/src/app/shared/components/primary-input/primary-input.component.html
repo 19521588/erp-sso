@@ -1,0 +1,48 @@
+<div>
+  <div class>
+    <div class="w-[336px] checked:text-blue ">
+      <label
+        for="text"
+        class="{{touch? 'text-black':'text-textblue'}} text-[14px] leading-5 font-semibold "
+        *ngIf="!IsReadonly"
+      >
+        {{title}}
+        <span
+          *ngIf="title && Primary"
+          class="text-red"
+        >
+          *
+        </span>
+
+      </label>
+      <label
+        for="text"
+        class="text-textgray text-[14px] leading-5 font-semibold "
+        *ngIf="IsReadonly"
+      >
+        {{title}}
+      </label>
+      <input
+        #text
+        type="text"
+        class="block w-full h-[45px] py-[10px] px-[12px] rounded-lg border border-linegray  text-textblue text-[16px] leading-6 tracking-wide font-semibold
+       focus:bg-white focus:text-black focus:border-textblue focus:outline-none"
+        [(ngModel)]="value"
+        on-focus="focusFunction()"
+        on-focusout="focusOutFunction()"
+        [readonly]="IsReadonly"
+        placeholder="{{placeholder}}"
+      >
+    </div>
+  </div>
+  <span
+    class="text-invalid flex"
+    *ngIf="firstErrorMessage && touch"
+  >
+    <img
+      src="/assets/icons/invalid.svg"
+      class="w-4 h-4"
+    >
+    <span class="ml-1">{{firstErrorMessage}}</span>
+  </span>
+</div>

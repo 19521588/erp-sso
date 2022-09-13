@@ -1,0 +1,37 @@
+<div>
+  <div class="{{menu?'w-[70px] pt-5 px-[10px]':'w-[270px] pt-[60px] text-center'}}   h-full  bg-textblue pb-[100px] ">
+    <div>
+      <img
+        src="{{menu?'/assets/icons/charm_menu-hamburger.svg':'/assets/icons/ooui_arrow-next-ltr.svg'}}"
+        class="{{menu?'w-12 h-12':'w-10 h-10 ml-[55px]'}} cursor-pointer"
+        (click)="openMenu()"
+      >
+
+      <img
+        src="/assets/img/avt.jpg"
+        class="{{menu?'w-12 h-12':'w-[100px] h-[100px] m-auto'}} mt-10 rounded-full  cursor-pointer"
+      >
+      <p
+        *ngIf="!menu"
+        class="text-primaryYellowe mt-4 text-5 font-semibold"
+      >
+        UserName
+      </p>
+      <div *ngIf="menu">
+        <img
+          src="/assets/icons/home.svg"
+          class=" mt-10 w-10 h-10 ml-1 cursor-pointer"
+        >
+        <img
+          src="/assets/icons/Person.svg"
+          class=" mt-10 w-12 h-12 cursor-pointer"
+        >
+      </div>
+      <div class="mt-6">
+        <div></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

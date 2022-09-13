@@ -1,0 +1,80 @@
+variables:
+    PROJECT_PATH: "$CI_PROJECT_DIR"
+    APP_OUTPUT_PATH: "$CI_PROJECT_DIR/dist/esso"
+
+stages:
+    - lint
+    - build
+    - prepare-docker-image
+    - deploy
+
+lint-check:
+    image: node:alpine
+    stage: lint
+    before_script:
+        - echo "Linting"
+    script:
+        - npm ci 
+        - npm run ng lint
+    tags:
+        - docker
+
+build-app:
+    image: node:alpine
+    only:
+        - develop
+    tags:
+        - docker
+    stage: build
+    before_script:
+        - echo "Building"
+    script:
+        - npm ci
+        - npm run build -- --configuration production
+    after_script:
+        - chmod -R 777 "$APP_OUTPUT_PATH"
+        - ls -la "$APP_OUTPUT_PATH"
+    artifacts:
+        name: "angular-app-pipeline"
+        paths:
+            - "$APP_OUTPUT_PATH"
+        expire_in: 2 hours
+
+prepare-docker-image:
+    stage: prepare-docker-image
+    needs: [build-app]
+    only:
+        - develop
+    dependencies:
+        - build-app
+    before_script:
+        - source ./env-param.sh
+        - echo "Prepare docker image"
+        - cicd_path=$(pwd)/cicd
+    script:
+        - echo "Building docker image"
+        - docker build -t "$service_name":"$tag" .
+        - echo "Pushing docker image to registry"
+        - docker tag "$service_name" "$CI_REGISTRY"/"$CI_REGISTRY_USER"/"$service_name"
+        - echo docker push "$CI_REGISTRY"/"$CI_REGISTRY_USER"/"$service_name"
+        - echo "$CI_REGISTRY"
+        - docker push "$CI_REGISTRY"/"$CI_REGISTRY_USER"/"$service_name"
+        - echo "Pushing docker image to registry successfully"
+    tags:
+        - ci-cd
+deploy: 
+    stage: deploy
+    only:
+        - develop
+    before_script:
+        - source ./env-param.sh
+        - cp -r /home/gitlab-runner/cicd/ $(pwd)/cicd-deploy/
+        - cicd_path=$(pwd)/cicd-deploy
+        - kubectl config set-cluster kubernetes-admin@kubernetes --server="$K8S_SERVER" --insecure-skip-tls-verify
+        - kubectl config set-credentials gitlab --token=$(echo $K8S_TOKEN | base64 -d)
+        - kubectl config set-context kubernetes-admin@kubernetes --cluster=kubernetes-admin@kubernetes --namespace=$namespace --user=gitlab
+        - kubectl config use-context kubernetes-admin@kubernetes
+    script:
+        - bash $cicd_path/deploy.sh
+    tags:
+        - ci-cd

@@ -1,0 +1,20 @@
+<div
+  (window:resize)="onResize($event)"
+  *ngIf="check"
+>
+  <div
+    class=" xl:h-[200px] xl:w-[285px] lg:mb-[-75px] lg:w-[230px] lg:h-[158px]
+    h-[120px] w-[170px] m-auto mb-[-35px]"
+    *ngIf="isForgot"
+  >
+    <img
+      src="/assets/img/TMA-logo2.png"
+      alt="logo"
+    >
+  </div>
+</div>
+
+
+
+
+<router-outlet></router-outlet>
