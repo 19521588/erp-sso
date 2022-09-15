@@ -28,6 +28,7 @@ import { ProfileUserComponent } from "./features/profile-user/profile-user.compo
 import { UserListingComponent } from "./features/user-listing/user-listing.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { ForgotPasswordCpComponent } from './intern-batch37/forgot-password-cp/forgot-password-cp.component';
+import { DatePickerComponent } from './intern-batch37/date-picker/date-picker.component';
 
 function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -43,6 +44,7 @@ function httpLoaderFactory(http: HttpClient) {
     ProfileUserComponent,
     UserListingComponent,
     ForgotPasswordCpComponent,
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,

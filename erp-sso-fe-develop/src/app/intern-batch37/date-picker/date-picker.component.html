@@ -1,0 +1,68 @@
+<label class="{{!check()?'text-red-600':'text-gray-800' }}">
+    Date of birth
+</label>
+<div class="max-w-xs grid grid-cols-3 gap-2 ">
+    <div>
+        <div class=" w-24 h-12 py-2.5 px-5 rounded-lg border {{!check()?'border-red-600': selectDay?'border-blue-600':'border-gray-200'}}"
+            (click)="select(0)">
+            <div class="flex w-full h-full ">
+                <div class="w-20 {{!selectDay?'text-blue-600':'text-black'}}">{{day}}</div>
+                <div class="ml-1 my-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-4 h-4 {{!selectDay?'text-blue-600':'text-black'}}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="selectDay" class="fixed w-24 h-72 overflow-y-scroll">
+            <div *ngFor="let d of days" class="text-center hover:bg-blue-500" (click)="changeValue(0,d)">
+                <span class="cursor-pointer ">
+                    {{d}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex w-24 h-12 py-2.5 px-5 rounded-lg border {{!check()?'border-red-600':selectMonth?'border-blue-600':'border-gray-200'}}"
+            (click)="select(1)">
+            <div class="w-20 {{!selectMonth?'text-blue-600':'text-black'}}">{{month}}</div>
+            <div class="ml-1 my-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4 {{!selectMonth?'text-blue-600':'text-black'}}">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+            </div>
+        </div>
+        <div *ngIf="selectMonth" class="fixed w-24 h-72 overflow-y-scroll">
+            <div *ngFor="let m of months" class="text-center hover:bg-blue-500" (click)="changeValue(1,m)">
+                <span class="cursor-pointer ">
+                    {{m}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex w-24 h-12 py-2.5 px-5 rounded-lg border {{!check()?'border-red-600':selectYear?'border-blue-600':'border-gray-200'}}"
+            (click)="select(2)">
+            <div class="w-20 {{!selectYear?'text-blue-600':'text-black'}}">{{year}}</div>
+            <div class="ml-1 my-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4 {{!selectYear?'text-blue-600':'text-black'}}">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+            </div>
+        </div>
+        <div *ngIf="selectYear" class="fixed w-24 h-72 overflow-y-scroll">
+            <div *ngFor="let y of years" class="text-center hover:bg-blue-500" (click)="changeValue(2,y)">
+                <span class="cursor-pointer ">
+                    {{y}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex mt-2 items-center" *ngIf="!check()&& !selectDay && !selectMonth && !selectYear">
+    <img src="../../assets/invalid.svg" class="w-4 h-4 mb-1">
+    <span class="ml-1 text-red-600">Vui lòng nhập lại</span>
+</div>
